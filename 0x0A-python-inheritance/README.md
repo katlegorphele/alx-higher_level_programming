@@ -1,5 +1,4 @@
-A short description of listed files
-
+A short description of all listed files
 ## Files
 | Filename | Description |
 | -------- | ----------- |
