@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ module for singly linked list """
+
+
 class Node:
     """ Defines a node"""
     def __init__(self, data, next_node=None):
