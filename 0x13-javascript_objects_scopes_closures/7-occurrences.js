@@ -1,3 +1,5 @@
+#!/usr/bin/node
+
 exports.nbOccurences = function (list, searchElement) {
   let count = 0; // Initialize count to 0
   // Loop through each element in the list
