@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 '''
-    This script takes in an argument and displays all values in the states table of hbtn_0e_0_usa where name matches the argument.
+    This script takes in an
+    argument and displays all
+    values in the states table
+    of hbtn_0e_0_usa where name
+    matches the argument.
 '''
 
 import MySQLdb
@@ -20,13 +24,16 @@ if __name__ == "__main__":
         user=u_name,
         passwd=sql_pass,
         db=sql_db
-    )  
+    )
 
     # Create cursor object
     cursor = db.cursor()
 
     # Execute SQL Query
-    cursor.execute("SELECT * FROM states WHERE name = '{state}' ORDER BY id ASC".format(state=state_name))
+    cursor.execute("SELECT * \
+                   FROM states \
+                   WHERE name = '{state}' \
+                   ORDER BY id ASC".format(state=state_name))
 
     # Fetch all rows and print them
     rows = cursor.fetchall()

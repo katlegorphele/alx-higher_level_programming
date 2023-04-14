@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-
-# script that takes in the name of a state as an argument and lists all cities of that state, using the database hbtn_0e_4_usa
+'''script that takes in the name of a state
+as an argument and lists all cities of that
+state, using the database hbtn_0e_4_usa'''
 
 import sys
 import MySQLdb
@@ -25,7 +26,11 @@ if __name__ == '__main__':
     cursor = db.cursor()
 
     # construct SQL Query
-    sql_query = "SELECT cities.name FROM cities INNER JOIN states ON cities.state_id = states.id WHERE states.name = '{state}' ORDER BY cities.id ASC".format(state=state_name)
+    sql_query = "SELECT cities.name FROM cities \
+        INNER JOIN states \
+            ON cities.state_id = states.id \
+                WHERE states.name = '{state}' \
+                    ORDER BY cities.id ASC".format(state=state_name)
 
     # Execute SQL Query
     cursor.execute(sql_query)
@@ -36,6 +41,6 @@ if __name__ == '__main__':
     cities = [row[0] for row in rows]
     # print the cities, separated by commas
     print(', '.join(cities))
-    
+
     # Close db connection
     db.close()
