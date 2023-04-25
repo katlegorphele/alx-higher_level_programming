@@ -1,39 +1,40 @@
 #!/usr/bin/python3
-'''
+"""
     This script takes in an
     argument and displays all
     values in the states table
     of hbtn_0e_0_usa where name
     matches the argument.
-'''
+"""
 
-import MySQLdb
-import sys
 
 if __name__ == "__main__":
-    # Get command line args
-    u_name = sys.argv[1]
-    sql_pass = sys.argv[2]
-    sql_db = sys.argv[3]
-    state_name = sys.argv[4]
+    from sys import argv
+    import MySQLdb
 
-    # Connect to DB
-    db = MySQLdb.connect(
-        host='localhost',
-        port=3306,
-        user=u_name,
-        passwd=sql_pass,
-        db=sql_db
-    )
+    try:
+        db = MySQLdb.connect(
+            host="localhost", port=3306,
+            user=argv[1], passwd=argv[2], db=argv[3]
+        )
+    except Exception:
+        print("Can't connect to database")
+        exit(1)
+
+    searched_state = argv[4]
 
     # Create cursor object
     cursor = db.cursor()
 
     # Execute SQL Query
-    cursor.execute("SELECT * \
+    cursor.execute(
+        "SELECT * \
                    FROM states \
                    WHERE name = '{state}' \
-                   ORDER BY id ASC".format(state=state_name))
+                   ORDER BY id ASC".format(
+            searched_state
+        )
+    )
 
     # Fetch all rows and print them
     rows = cursor.fetchall()

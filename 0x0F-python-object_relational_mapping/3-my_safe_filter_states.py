@@ -1,40 +1,39 @@
 #!/usr/bin/python3
-'''
-script that takes in an argument and
-displays all values in the states table
-of hbtn_0e_0_usa where name matches the argument
-'''
-import sys
-import MySQLdb
-
+"""
+SQL Injection safe script
+"""
 
 if __name__ == '__main__':
+    from sys import argv
+    import MySQLdb as mysql
+    import re
 
-    # Connect to DB
-    db = MySQLdb.connect(
-        host='localhost',
-        port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3]
-    )
+    if (len(argv) != 5):
+        print('Use: username, password, db name, state name')
+        exit(1)
 
-    # Create cursor object
+    searched = ' '.join(argv[4].split())
+
+    if (re.search('^[a-zA-Z ]+$', searched) is None):
+        print('Enter a valid state name')
+        exit(1)
+
+    try:
+        db = mysql.connect(host='localhost', port=3306, user=argv[1],
+                           passwd=argv[2], db=argv[3])
+    except Exception:
+        print('Can\'t connect to database')
+        exit(1)
+
     cursor = db.cursor()
 
-    # Construct SQL Query
-    sql_query = "SELECT * \
-                FROM states \
-                WHERE name = '{state}' \
-                ORDER BY id ASC".format(state=sys.argv[4])
+    cursor.execute("SELECT * FROM states \
+                    WHERE name = '{:s}' ORDER BY id ASC;".format(searched))
 
-    # Execute SQL Query
-    cursor.execute(sql_query)
+    result_query = cursor.fetchall()
 
-    # Fetch all rows and print them
-    rows = cursor.fetchall()
-    for row in rows:
+    for row in result_query:
         print(row)
 
-    # Close db connection
+    cursor.close()
     db.close()
