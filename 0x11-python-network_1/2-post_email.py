@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
 """
-Script that takes in URL and email, sends POST request to passed URL with email as parameter, displays body of response
-decoded in utf-8
+Script that takes in URL and email, sends POST request 
+to passed URL with email as parameter, displays body of 
+response decoded in utf-8
 """
 
 import urllib.request
