@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Takes in a URL, sends a request to the URL, 
+Takes in a URL, sends a request to the URL
 and displays the body of the response (decoded in utf-8).
 Handles urllib.error.HTTPError exceptions.
 """
